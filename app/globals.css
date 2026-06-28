@@ -4,57 +4,45 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --parx-black:    #0F0F0F;
-  --parx-charcoal: #1A1A1A;
-  --parx-red:      #C8102E;
-  --parx-white:    #FFFFFF;
-  --parx-offwhite: #F5F2EE;
-  --parx-gold:     #C9A96E;
-}
-
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--parx-black);
-  color: var(--parx-white);
+  background: #FFFFFF;
+  color: #1A1A1A;
   font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
-/* Red accent line — Parx signature */
 .parx-accent-line {
   display: inline-block;
   width: 40px;
   height: 3px;
-  background: var(--parx-red);
+  background: #C8102E;
   margin-bottom: 1.5rem;
 }
 
-/* Section divider */
-.section-divider {
-  border: none;
-  border-top: 0.5px solid #2A2A2A;
-}
-
-/* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--parx-black); }
-::-webkit-scrollbar-thumb { background: var(--parx-red); border-radius: 2px; }
+::-webkit-scrollbar-track { background: #F8F8F8; }
+::-webkit-scrollbar-thumb { background: #C8102E; border-radius: 2px; }
 
-/* Selection */
-::selection { background: var(--parx-red); color: #fff; }
+::selection { background: #C8102E; color: #fff; }
 
-/* Smooth image load */
 img { transition: opacity 0.3s ease; }
 
-@layer utilities {
-  .text-balance { text-wrap: balance; }
-  .delay-100 { animation-delay: 0.1s; }
-  .delay-200 { animation-delay: 0.2s; }
-  .delay-300 { animation-delay: 0.3s; }
-  .delay-500 { animation-delay: 0.5s; }
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes scrollSlow {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-scroll {
+  animation: scroll 20s linear infinite;
+}
+.animate-scroll-slow {
+  animation: scrollSlow 30s linear infinite;
 }
