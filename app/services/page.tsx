@@ -220,23 +220,43 @@ export default async function ServicesPage() {
               ].map((step, i) => {
                 const isLeft = i % 2 === 0
                 return (
-                  <div key={step.num} className={`relative flex items-center gap-6 md:gap-0 mb-12 md:mb-16 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                    {/* Content box */}
-                    <div className={`ml-16 md:ml-0 md:w-[calc(50%-2.5rem)] bg-white border border-parx-border p-6 md:p-8 ${isLeft ? 'md:mr-10' : 'md:ml-10'}`}>
-                      <span className="text-parx-red font-mono text-xs tracking-widest">{step.num}</span>
-                      <h3 className="font-display font-light text-parx-black text-xl md:text-2xl mt-2 mb-3">{step.title}</h3>
-                      <p className="text-parx-gray text-sm leading-relaxed">{step.desc}</p>
-                    </div>
+                  <div key={step.num} className="relative mb-8 md:mb-16">
 
-                    {/* Circle on the line */}
-                    <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-white border-2 border-parx-red -translate-x-[7px] md:translate-x-0 z-10" />
-
-                    {/* Illustration — desktop only, opposite side */}
-                    <div className={`hidden md:flex md:w-[calc(50%-2.5rem)] items-center justify-center ${isLeft ? 'md:ml-10' : 'md:mr-10'}`}>
-                      <div className="w-40 h-32 opacity-80">
-                        {step.illustration}
+                    {/* Mobile layout: full width card with illustration inside */}
+                    <div className="md:hidden ml-14 bg-white border border-parx-border overflow-hidden">
+                      {/* Illustration top */}
+                      <div className="bg-parx-cream flex items-center justify-center p-6 h-36">
+                        <div className="w-full max-w-[180px] h-full opacity-90">
+                          {step.illustration}
+                        </div>
+                      </div>
+                      {/* Content bottom */}
+                      <div className="p-5">
+                        <span className="text-parx-red font-mono text-xs tracking-widest">{step.num}</span>
+                        <h3 className="font-display font-light text-parx-black text-xl mt-2 mb-2">{step.title}</h3>
+                        <p className="text-parx-gray text-sm leading-relaxed">{step.desc}</p>
                       </div>
                     </div>
+
+                    {/* Desktop layout: alternating left/right */}
+                    <div className={`hidden md:flex items-center gap-0 ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}>
+                      {/* Content box */}
+                      <div className={`w-[calc(50%-2.5rem)] bg-white border border-parx-border p-8 ${isLeft ? 'mr-10' : 'ml-10'}`}>
+                        <span className="text-parx-red font-mono text-xs tracking-widest">{step.num}</span>
+                        <h3 className="font-display font-light text-parx-black text-2xl mt-2 mb-3">{step.title}</h3>
+                        <p className="text-parx-gray text-sm leading-relaxed">{step.desc}</p>
+                      </div>
+
+                      {/* Illustration */}
+                      <div className={`w-[calc(50%-2.5rem)] flex items-center justify-center ${isLeft ? 'ml-10' : 'mr-10'}`}>
+                        <div className="w-44 h-36 opacity-85">
+                          {step.illustration}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Circle on the vertical line */}
+                    <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 top-8 w-4 h-4 rounded-full bg-white border-2 border-parx-red -translate-x-[7px] md:translate-x-0 z-10" />
                   </div>
                 )
               })}
