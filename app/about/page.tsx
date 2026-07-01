@@ -2,6 +2,7 @@ import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import PageHero from '@/components/PageHero'
+import { BuilderLogosSection } from '@/components/SanityLogoSliders'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
@@ -87,7 +88,7 @@ export default async function AboutPage() {
                   {[
                     { num: '14+', label: 'Years' },
                     { num: '250+', label: 'Projects' },
-                    { num: '5yr', label: 'Warranty' },
+                    { num: '★', label: 'After-Sales Care' },
                   ].map(s => (
                     <div key={s.label} className="border-l-2 border-parx-red pl-4">
                       <div className="font-display text-2xl text-parx-black font-light">{s.num}</div>
@@ -138,7 +139,7 @@ export default async function AboutPage() {
                 { title: 'Own Factory', desc: 'Every piece manufactured in our own facility — no outsourcing, no quality compromise.' },
                 { title: 'Fixed Pricing', desc: 'What we quote is what you pay. No hidden charges, no surprise additions.' },
                 { title: 'On-Time Delivery', desc: 'Factory-controlled timelines mean your home is ready when promised.' },
-                { title: '5-Year Warranty', desc: 'Complete workmanship warranty on every project. We stand behind our work.' },
+                { title: 'After-Sales Care', desc: 'Full support throughout and after project completion. We stay with you long after handover.' },
               ].map((item, i) => (
                 <div key={item.title} className="group p-6 border border-parx-border hover:border-parx-red transition-colors duration-300">
                   <span className="text-parx-red font-mono text-sm">0{i + 1}</span>
@@ -150,35 +151,28 @@ export default async function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-parx-cream py-16 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 mb-8 text-center">
-            <p className="text-parx-gray text-xs tracking-[0.3em] uppercase">Trusted by homeowners at</p>
-          </div>
-          <div className="relative">
-            <div className="flex animate-scroll gap-12 items-center">
-              {[...['Aparna Constructions', 'My Home Constructions', 'Prestige Group', 'Sumadhura Infracon', 'Rajapushpa Properties', 'Janapriya', 'Vasavi Group'], ...['Aparna Constructions', 'My Home Constructions', 'Prestige Group', 'Sumadhura Infracon', 'Rajapushpa Properties', 'Janapriya', 'Vasavi Group']].map((name, i) => (
-                <div key={`${name}-${i}`} className="flex-shrink-0 h-16 w-44 bg-white border border-parx-border flex items-center justify-center px-4 hover:border-parx-red transition-colors">
-                  <span className="text-parx-gray text-xs text-center font-medium">{name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <BuilderLogosSection />
 
         <section className="bg-parx-red py-20">
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <h2 className="font-display font-light text-white text-3xl md:text-4xl mb-6">
+            <h2 className="font-display font-light text-white text-3xl md:text-4xl mb-8">
               Let&apos;s create something <em className="italic">beautiful together</em>
             </h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a href="https://wa.me/919177822018?text=Hi%20Parx%20Interiors%2C%20I%20would%20like%20a%20free%20consultation"
                 target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 bg-white text-parx-red hover:bg-parx-cream px-10 py-4 text-sm tracking-[0.15em] uppercase font-medium transition-all">
+                className="group inline-flex items-center gap-3 bg-white text-parx-red hover:bg-parx-cream pl-7 pr-2.5 py-2.5 text-[14px] tracking-[0.5px] rounded-full font-medium transition-all duration-300 hover:shadow-lg">
                 Start a Conversation
+                <span className="w-9 h-9 rounded-full bg-parx-red/10 flex items-center justify-center group-hover:bg-parx-red/20 group-hover:rotate-[-35deg] transition-all duration-300">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </span>
               </a>
               <Link href="/contact"
-                className="inline-flex items-center justify-center gap-3 border border-white/40 hover:border-white text-white px-10 py-4 text-sm tracking-[0.15em] uppercase transition-all">
+                className="group inline-flex items-center gap-3 border border-white/40 hover:border-white text-white pl-7 pr-2.5 py-2.5 text-[14px] tracking-[0.5px] rounded-full transition-all duration-300">
                 Visit Our Studio
+                <span className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 group-hover:rotate-[-35deg] transition-all duration-300">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </span>
               </Link>
             </div>
           </div>
