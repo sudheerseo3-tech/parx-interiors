@@ -5,12 +5,36 @@ import PageHero from '@/components/PageHero'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 
+const PROJECT_ID = 'dx9xg01d'
+const DATASET = 'production'
+
+function imgUrl(image: any, width = 800) {
+  if (!image?.asset?._ref) return ''
+  const ref = image.asset._ref
+  const [, id, dimensions, format] = ref.split('-')
+  return `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}/${id}-${dimensions}.${format}?w=${width}&auto=format`
+}
+
+async function getFounder() {
+  try {
+    const query = encodeURIComponent('*[_type == "teamMember"] | order(_createdAt asc)[0]{ name, role, bio, photo }')
+    const res = await fetch(`https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${query}`, { next: { revalidate: 60 } })
+    const data = await res.json()
+    return data.result
+  } catch {
+    return null
+  }
+}
+
 export const metadata: Metadata = {
   title: 'About Us',
   description: 'Parx Interiors — Founded in 2011 by Mani Teja Achuri. 14+ years of delivering premium interiors across Hyderabad with in-house manufacturing.',
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const founder = await getFounder()
+  const founderImage = founder?.photo ? imgUrl(founder.photo) : null
+
   return (
     <>
       <Nav />
@@ -25,12 +49,20 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <div className="relative">
-                <div className="aspect-[4/5] bg-parx-light border border-parx-border flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="font-display text-6xl text-parx-border mb-4">🏭</div>
-                    <p className="text-parx-gray text-sm tracking-widest">STUDIO / FACTORY IMAGE</p>
-                    <p className="text-parx-gray text-[10px] mt-1">Upload from Sanity dashboard</p>
-                  </div>
+                <div className="aspect-[4/5] bg-parx-light border border-parx-border overflow-hidden">
+                  {founderImage ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={founderImage} alt={founder?.name || 'Mani Teja Achuri'} className="w-full h-full object-cover object-top" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-24 h-24 rounded-full bg-parx-red flex items-center justify-center mx-auto mb-4">
+                          <span className="font-display text-3xl text-white font-light">MT</span>
+                        </div>
+                        <p className="text-parx-gray text-xs tracking-widest">MANI TEJA ACHURI</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="absolute -bottom-6 -right-6 bg-parx-red p-6 z-10">
                   <div className="font-display text-4xl text-white font-light">2011</div>
