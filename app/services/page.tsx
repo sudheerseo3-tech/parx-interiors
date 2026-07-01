@@ -59,6 +59,50 @@ export default async function ServicesPage() {
 
         <ServicesSplitLayout services={services} />
 
+        {/* Journey / Process Timeline */}
+        <section className="bg-parx-cream py-20 md:py-28">
+          <div className="max-w-5xl mx-auto px-4 md:px-6">
+            <div className="text-center mb-16">
+              <div className="parx-accent-line mx-auto" />
+              <h2 className="font-display font-light text-parx-black text-3xl md:text-4xl">
+                Your journey to a <em className="italic text-parx-red">dream home</em>
+              </h2>
+              <p className="text-parx-gray mt-4 max-w-md mx-auto text-sm leading-relaxed">
+                A transparent, step-by-step process — so you always know what&apos;s happening and what&apos;s next.
+              </p>
+            </div>
+
+            <div className="relative">
+              {/* Vertical line */}
+              <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-parx-border md:-translate-x-px" />
+
+              {[
+                { num: '01', title: 'Free Consultation', desc: 'We begin with a detailed conversation — your space, your lifestyle, your budget. No sales pitch, just listening. Our designer visits your home and understands every requirement before a single line is drawn.' },
+                { num: '02', title: 'Design & 3D Visualisation', desc: 'Our team creates a complete 3D render of your space so you can see exactly how it will look before execution begins. You approve every detail — colours, materials, layout — nothing moves forward without your sign-off.' },
+                { num: '03', title: 'Transparent Quote', desc: 'You receive a fixed, itemised quote. What we quote is what you pay — no hidden charges, no last-minute additions. You know the exact cost before we begin.' },
+                { num: '04', title: 'Factory Manufacturing', desc: 'Every piece of furniture and cabinetry is manufactured in our own facility under strict quality control. No outsourcing, no subcontracting. Factory-precision means consistent quality across your entire home.' },
+                { num: '05', title: 'Installation', desc: 'Our trained installation team handles every fitting, electrical coordination, and finishing detail on-site. We work to a committed timeline so your home is ready when promised.' },
+                { num: '06', title: 'Handover & After-Sales Care', desc: 'We do a complete walkthrough with you before handover. Every detail is checked and signed off. After you move in, our team remains available — full support for any queries or adjustments.' },
+              ].map((step, i) => {
+                const isLeft = i % 2 === 0
+                return (
+                  <div key={step.num} className={`relative flex items-start gap-6 md:gap-0 mb-12 md:mb-0 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                    {/* Content box */}
+                    <div className={`ml-16 md:ml-0 md:w-[calc(50%-2.5rem)] bg-white border border-parx-border p-6 md:p-8 ${isLeft ? 'md:mr-10' : 'md:ml-10'} md:mb-12`}>
+                      <span className="text-parx-red font-mono text-xs tracking-widest">{step.num}</span>
+                      <h3 className="font-display font-light text-parx-black text-xl md:text-2xl mt-2 mb-3">{step.title}</h3>
+                      <p className="text-parx-gray text-sm leading-relaxed">{step.desc}</p>
+                    </div>
+
+                    {/* Circle on the line */}
+                    <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 w-4 h-4 rounded-full bg-white border-2 border-parx-red mt-6 -translate-x-[7px] md:translate-x-0" />
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
         <section className="bg-parx-red py-20">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <h2 className="font-display font-light text-white text-3xl md:text-4xl mb-8">
