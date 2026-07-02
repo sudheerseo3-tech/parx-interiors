@@ -254,7 +254,6 @@ function FinalCtaSection({ headline, subtext, btnLabel, onCtaClick }: { headline
         <p className="font-sans text-white/75 text-sm leading-relaxed mb-10 max-w-md mx-auto">{subtext}</p>
         <a
           href="#lp-calculator"
-          onClick={e => { e.preventDefault(); document.getElementById('lp-calculator')?.scrollIntoView({ behavior: 'smooth' }) }}
           className="inline-flex items-center gap-3 bg-white font-sans font-semibold text-sm px-10 py-4 rounded-full transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
           style={{ color: '#D63E73', letterSpacing: '0.03em' }}
         >
