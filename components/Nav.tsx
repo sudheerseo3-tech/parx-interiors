@@ -48,7 +48,7 @@ export default function Nav() {
         <Link href="/" className="flex-shrink-0">
           {logo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={logo} alt="Parx Interiors" className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-7 md:h-8' : 'h-8 md:h-9'}`} />
+            <img src={logo} alt="Parx Interiors" className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10 md:h-11' : 'h-11 md:h-12'}`} />
           ) : (
             <div className="flex flex-col leading-none">
               <span className={`font-sans font-black tracking-tight text-parx-black transition-all ${scrolled ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'}`}>

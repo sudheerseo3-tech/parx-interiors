@@ -33,7 +33,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             {logo ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={logo} alt="Parx Interiors" className="h-9 w-auto object-contain mb-5 brightness-0 invert" />
+              <img src={logo} alt="Parx Interiors" className="h-12 w-auto object-contain mb-5" />
             ) : (
               <div className="flex flex-col leading-none mb-5">
                 <span className="font-sans font-black text-2xl tracking-tight text-white">
