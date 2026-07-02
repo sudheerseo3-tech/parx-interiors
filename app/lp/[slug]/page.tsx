@@ -35,7 +35,7 @@ async function getLp(slug: string) {
   )
   const res = await fetch(
     `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${query}`,
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 60 } }
   )
   const data = await res.json()
   return data.result
@@ -49,7 +49,7 @@ async function getLogos() {
   }`)
   const res = await fetch(
     `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${q}`,
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 60 } }
   )
   const data = await res.json()
   return data.result ?? { builders: [], brands: [] }
