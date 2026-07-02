@@ -1,5 +1,4 @@
 'use client'
-import { useRef, useState, useCallback } from 'react'
 
 interface Pair {
   label: string
@@ -7,65 +6,43 @@ interface Pair {
   afterImage: string
 }
 
-function CompareSlider({ pair }: { pair: Pair }) {
-  const [pos, setPos] = useState(50)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const dragging = useRef(false)
-
-  const updatePos = useCallback((clientX: number) => {
-    const el = containerRef.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const pct = Math.max(5, Math.min(95, ((clientX - rect.left) / rect.width) * 100))
-    setPos(pct)
-  }, [])
-
-  const onPointerDown = (e: React.PointerEvent) => {
-    dragging.current = true
-    ;(e.target as HTMLElement).setPointerCapture(e.pointerId)
-    updatePos(e.clientX)
-  }
-  const onPointerMove = (e: React.PointerEvent) => { if (dragging.current) updatePos(e.clientX) }
-  const onPointerUp = () => { dragging.current = false }
-
+function BeforeAfterCard({ pair }: { pair: Pair }) {
   return (
-    <div className="rounded-2xl overflow-hidden shadow-sm bg-stone-100" style={{ aspectRatio: '4/3' }}>
-      <div
-        ref={containerRef}
-        className="relative w-full h-full select-none cursor-col-resize touch-none"
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerLeave={onPointerUp}
-      >
-        {/* Before image */}
-        <div className="absolute inset-0">
+    <div className="rounded-2xl overflow-hidden" style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
+      {pair.label && (
+        <div className="bg-white px-5 py-3.5 border-b border-parx-border flex items-center gap-2">
+          <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#D63E73' }} />
+          <p className="font-sans font-semibold text-parx-black text-sm">{pair.label}</p>
+        </div>
+      )}
+      <div className="grid grid-cols-2">
+        {/* Before */}
+        <div className="relative">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={pair.beforeImage} alt="Before" className="w-full h-full object-cover" loading="lazy" draggable={false} />
-          <span className="absolute bottom-4 left-4 text-[10px] font-sans font-bold tracking-[0.18em] uppercase text-white bg-black/50 backdrop-blur-sm px-2.5 py-1 rounded-full">Before</span>
+          <img
+            src={pair.beforeImage}
+            alt={`Before — ${pair.label}`}
+            className="w-full object-cover"
+            style={{ aspectRatio: '4/3' }}
+            loading="lazy"
+          />
+          <span className="absolute bottom-3 left-3 text-[10px] font-sans font-bold tracking-[0.18em] uppercase text-white bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full">
+            Before
+          </span>
         </div>
 
-        {/* After image — clipped from the left */}
-        <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
+        {/* After */}
+        <div className="relative border-l-2 border-white">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={pair.afterImage} alt="After" className="w-full h-full object-cover" loading="lazy" draggable={false} />
-          <span className="absolute bottom-4 right-4 text-[10px] font-sans font-bold tracking-[0.18em] uppercase text-white px-2.5 py-1 rounded-full" style={{ background: '#D63E73' }}>After</span>
-        </div>
-
-        {/* Drag handle */}
-        <div className="absolute top-0 bottom-0 w-px bg-white/90 shadow-lg" style={{ left: `${pos}%`, transform: 'translateX(-50%)' }}>
-          <div className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white shadow-xl flex items-center justify-center gap-0.5">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M5 3L2 7L5 11" stroke="#1B1B1B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M9 3L12 7L9 11" stroke="#1B1B1B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-        </div>
-
-        {/* Room label */}
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 pointer-events-none">
-          <span className="text-[10px] font-sans font-semibold tracking-[0.15em] uppercase text-white/80 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full whitespace-nowrap">
-            {pair.label}
+          <img
+            src={pair.afterImage}
+            alt={`After — ${pair.label}`}
+            className="w-full object-cover"
+            style={{ aspectRatio: '4/3' }}
+            loading="lazy"
+          />
+          <span className="absolute bottom-3 right-3 text-[10px] font-sans font-bold tracking-[0.18em] uppercase text-white px-3 py-1 rounded-full" style={{ background: '#D63E73' }}>
+            After
           </span>
         </div>
       </div>
@@ -85,13 +62,13 @@ export default function LpBeforeAfter({ pairs }: { pairs: Pair[] }) {
             Real Transformations,<br /><em className="italic" style={{ color: '#D63E73' }}>Real Homes</em>
           </h2>
           <p className="font-sans text-parx-gray text-sm max-w-md">
-            Drag the slider to reveal the transformation. Every project is crafted in our own manufacturing facility.
+            Every project crafted in our own manufacturing facility in Hyderabad.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {pairs.map((pair, i) => (
-            <CompareSlider key={i} pair={pair} />
+            <BeforeAfterCard key={i} pair={pair} />
           ))}
         </div>
       </div>

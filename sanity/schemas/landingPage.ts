@@ -4,22 +4,24 @@ export default {
   type: 'document',
   icon: () => '🚀',
   groups: [
-    { name: 'meta',      title: '① Page Info & SEO' },
-    { name: 'hero',      title: '② Hero Section' },
-    { name: 'gallery',   title: '③ Before & After' },
-    { name: 'process',   title: '④ Process Steps' },
-    { name: 'why',       title: '⑤ Why Choose Parx' },
-    { name: 'faq',       title: '⑥ FAQ' },
-    { name: 'cta',       title: '⑦ Final CTA' },
+    { name: 'meta',    title: '① Page Info & SEO' },
+    { name: 'hero',    title: '② Hero Section' },
+    { name: 'gallery', title: '③ Before & After' },
+    { name: 'process', title: '④ Process Steps' },
+    { name: 'why',     title: '⑤ Why Choose Parx' },
+    { name: 'faq',     title: '⑥ FAQ' },
+    { name: 'cta',     title: '⑦ Final CTA & WhatsApp' },
+    { name: 'footer',  title: '⑧ Footer & Social Media' },
   ],
   fields: [
+
     // ─── ① Page Info & SEO ────────────────────────────────────────────────
     {
       name: 'internalTitle',
       title: 'Internal Page Name',
       type: 'string',
       group: 'meta',
-      description: 'Only visible in Sanity. E.g. "Prospecting - July 2025" or "Remarketing - Hyderabad"',
+      description: 'Only visible in Sanity. E.g. "Prospecting – July 2025" or "Remarketing – Hyderabad"',
       validation: (Rule: any) => Rule.required(),
     },
     {
@@ -27,7 +29,7 @@ export default {
       title: 'Page URL Slug',
       type: 'slug',
       group: 'meta',
-      description: 'The URL will be: parxinteriors.com/lp/[slug]  →  E.g. slug "new" = /lp/new',
+      description: 'The URL will be: parxinteriors.com/[slug]  →  E.g. slug "hyderabad-home-interiors"',
       options: { source: 'internalTitle', maxLength: 60 },
       validation: (Rule: any) => Rule.required(),
     },
@@ -44,7 +46,8 @@ export default {
       title: 'SEO Title (browser tab & Google)',
       type: 'string',
       group: 'meta',
-      description: 'Keep under 60 characters. E.g. "Premium Interior Design Hyderabad | Parx Interiors"',
+      description: 'Keep under 60 characters.',
+      initialValue: 'Premium Interior Design Hyderabad | Parx Interiors',
     },
     {
       name: 'metaDescription',
@@ -52,7 +55,8 @@ export default {
       type: 'text',
       rows: 2,
       group: 'meta',
-      description: 'Keep under 155 characters. E.g. "Free consultation. End-to-end interior design in Hyderabad."',
+      description: 'Keep under 155 characters.',
+      initialValue: 'Free consultation. End-to-end interior design in Hyderabad. Starting from ₹8 Lakhs.',
     },
     {
       name: 'ogImage',
@@ -62,6 +66,14 @@ export default {
       options: { hotspot: true },
       description: 'Shown when someone shares the link. Recommended: 1200 × 630 px.',
     },
+    {
+      name: 'favicon',
+      title: 'Favicon (browser tab icon)',
+      type: 'image',
+      group: 'meta',
+      options: { hotspot: false },
+      description: 'Icon shown in browser tab for this landing page. Recommended: 512 × 512 px PNG with transparent background.',
+    },
 
     // ─── ② Hero Section ───────────────────────────────────────────────────
     {
@@ -70,7 +82,7 @@ export default {
       type: 'image',
       group: 'hero',
       options: { hotspot: true },
-      description: 'Full-screen background image. Recommended: 1920 × 1080 px minimum. Use a premium interior photo.',
+      description: 'Full-screen background image. Recommended: 1920 × 1080 px. Use a premium interior photo.',
       validation: (Rule: any) => Rule.required().error('Hero image is required'),
     },
     {
@@ -78,7 +90,7 @@ export default {
       title: 'Hero Headline',
       type: 'string',
       group: 'hero',
-      description: 'Main large heading. E.g. "Where Function Meets Finesse."',
+      description: 'Main large heading.',
       initialValue: 'Where Function Meets Finesse.',
     },
     {
@@ -87,7 +99,6 @@ export default {
       type: 'text',
       rows: 2,
       group: 'hero',
-      description: 'Supporting text below the headline.',
       initialValue: 'Thoughtfully designed interiors for modern homes in Hyderabad.',
     },
     {
@@ -95,15 +106,13 @@ export default {
       title: 'Primary CTA Button Text',
       type: 'string',
       group: 'hero',
-      description: 'Main call-to-action. E.g. "Estimate Your Interior Budget"',
-      initialValue: 'Estimate Your Interior Budget',
+      initialValue: 'Get Free Consultation',
     },
     {
       name: 'heroSecondaryCta',
       title: 'Secondary CTA Button Text',
       type: 'string',
       group: 'hero',
-      description: 'E.g. "Book Free Consultation"',
       initialValue: 'Book Free Consultation',
     },
     {
@@ -112,7 +121,7 @@ export default {
       type: 'array',
       of: [{ type: 'string' }],
       group: 'hero',
-      description: 'Short trust statements. Max 4 recommended. E.g. "Free Consultation", "3D Design"',
+      description: 'Short trust statements. Max 4 recommended.',
       initialValue: ['Free Consultation', '3D Design Included', 'Transparent Pricing', 'Professional Installation'],
     },
 
@@ -126,26 +135,9 @@ export default {
         type: 'object',
         title: 'Transformation',
         fields: [
-          {
-            name: 'label',
-            title: 'Room Label',
-            type: 'string',
-            description: 'E.g. "Living Room", "Modular Kitchen", "Master Bedroom Wardrobe"',
-          },
-          {
-            name: 'beforeImage',
-            title: 'Before Photo',
-            type: 'image',
-            options: { hotspot: true },
-            description: 'The "before" state. Try to match the angle/crop with the After photo.',
-          },
-          {
-            name: 'afterImage',
-            title: 'After Photo',
-            type: 'image',
-            options: { hotspot: true },
-            description: 'The "after" state showing the completed interior.',
-          },
+          { name: 'label', title: 'Room Label', type: 'string', description: 'E.g. "Living Room", "Modular Kitchen"' },
+          { name: 'beforeImage', title: 'Before Photo', type: 'image', options: { hotspot: true } },
+          { name: 'afterImage',  title: 'After Photo',  type: 'image', options: { hotspot: true } },
         ],
         preview: {
           select: { title: 'label' },
@@ -154,7 +146,7 @@ export default {
           },
         },
       }],
-      description: 'Upload before & after photo pairs. Upload up to 6 transformations. Both images should be the same room from the same angle.',
+      description: 'Upload before & after photo pairs. Max 6. Both images should be the same room from the same angle.',
       validation: (Rule: any) => Rule.max(6),
     },
 
@@ -166,17 +158,13 @@ export default {
       group: 'process',
       of: [{
         type: 'object',
-        title: 'Step',
         fields: [
-          { name: 'stepNumber', title: 'Step Number', type: 'string', description: 'E.g. "01"' },
-          { name: 'title', title: 'Step Title', type: 'string', description: 'E.g. "Consultation"' },
-          { name: 'description', title: 'Step Description (1-2 sentences)', type: 'text', rows: 2 },
+          { name: 'stepNumber',   title: 'Step Number',      type: 'string', description: 'E.g. "01"' },
+          { name: 'title',        title: 'Step Title',       type: 'string' },
+          { name: 'description',  title: 'Step Description', type: 'text', rows: 2 },
         ],
-        preview: {
-          select: { title: 'title', subtitle: 'stepNumber' },
-        },
+        preview: { select: { title: 'title', subtitle: 'stepNumber' } },
       }],
-      description: 'The 6-step journey. If you leave this empty, default steps will be used automatically.',
     },
 
     // ─── ⑤ Why Choose Parx ───────────────────────────────────────────────
@@ -187,17 +175,13 @@ export default {
       group: 'why',
       of: [{
         type: 'object',
-        title: 'USP Card',
         fields: [
-          { name: 'icon', title: 'Icon (emoji)', type: 'string', description: 'E.g. 🏭 or ✓' },
-          { name: 'title', title: 'Card Title', type: 'string' },
-          { name: 'description', title: 'Card Description (1-2 sentences)', type: 'text', rows: 2 },
+          { name: 'icon',        title: 'Icon (emoji)', type: 'string' },
+          { name: 'title',       title: 'Card Title',   type: 'string' },
+          { name: 'description', title: 'Description',  type: 'text', rows: 2 },
         ],
-        preview: {
-          select: { title: 'title', subtitle: 'icon' },
-        },
+        preview: { select: { title: 'title', subtitle: 'icon' } },
       }],
-      description: 'USP cards. Leave empty to use the 6 default cards automatically.',
     },
 
     // ─── ⑥ FAQ ────────────────────────────────────────────────────────────
@@ -208,37 +192,21 @@ export default {
       group: 'faq',
       of: [{
         type: 'object',
-        title: 'FAQ',
         fields: [
-          {
-            name: 'question',
-            title: 'Question',
-            type: 'string',
-            validation: (Rule: any) => Rule.required(),
-          },
-          {
-            name: 'answer',
-            title: 'Answer',
-            type: 'text',
-            rows: 3,
-            validation: (Rule: any) => Rule.required(),
-          },
+          { name: 'question', title: 'Question', type: 'string', validation: (Rule: any) => Rule.required() },
+          { name: 'answer',   title: 'Answer',   type: 'text', rows: 3, validation: (Rule: any) => Rule.required() },
         ],
-        preview: {
-          select: { title: 'question' },
-        },
+        preview: { select: { title: 'question' } },
       }],
-      description: 'Up to 8 FAQs. Leave empty to use default questions automatically.',
       validation: (Rule: any) => Rule.max(8),
     },
 
-    // ─── ⑦ Final CTA ──────────────────────────────────────────────────────
+    // ─── ⑦ Final CTA & WhatsApp ───────────────────────────────────────────
     {
       name: 'finalCtaHeadline',
       title: 'Final CTA Headline',
       type: 'string',
       group: 'cta',
-      description: 'E.g. "Let\'s Design a Home You\'ll Love for Years to Come."',
       initialValue: "Let's Design a Home You'll Love for Years to Come.",
     },
     {
@@ -247,7 +215,7 @@ export default {
       type: 'text',
       rows: 2,
       group: 'cta',
-      initialValue: 'Book a free consultation with our interior design experts and start your home transformation with confidence.',
+      initialValue: 'Book a free consultation and start your home transformation with confidence.',
     },
     {
       name: 'finalCtaButton',
@@ -261,10 +229,90 @@ export default {
       title: 'WhatsApp Number for Leads',
       type: 'string',
       group: 'cta',
-      description: 'Include country code. E.g. "+919177822018". Leads from this page will go directly to this number.',
+      description: 'Include country code. E.g. "+919177822018". All form leads from this page go to this number.',
       initialValue: '+919177822018',
     },
+
+    // ─── ⑧ Footer & Social Media ──────────────────────────────────────────
+    {
+      name: 'footerLogo',
+      title: 'Footer Logo (white/light version)',
+      type: 'image',
+      group: 'footer',
+      options: { hotspot: false },
+      description: 'Upload your white logo for the dark footer. If empty, text logo will appear automatically.',
+    },
+    {
+      name: 'footerPhone',
+      title: 'Phone Number',
+      type: 'string',
+      group: 'footer',
+      initialValue: '+91 91778 22018',
+    },
+    {
+      name: 'footerEmail',
+      title: 'Email Address',
+      type: 'string',
+      group: 'footer',
+      initialValue: 'parxinteriors@gmail.com',
+    },
+    {
+      name: 'footerAddress',
+      title: 'Office Address',
+      type: 'string',
+      group: 'footer',
+      initialValue: 'SMR Vinay Iconia, Kondapur, Hyderabad',
+    },
+
+    // Social media links
+    {
+      name: 'instagramUrl',
+      title: 'Instagram URL',
+      type: 'url',
+      group: 'footer',
+      description: 'E.g. https://instagram.com/parxinteriors',
+    },
+    {
+      name: 'facebookUrl',
+      title: 'Facebook Page URL',
+      type: 'url',
+      group: 'footer',
+    },
+    {
+      name: 'whatsappSocialUrl',
+      title: 'WhatsApp Number (social icon)',
+      type: 'string',
+      group: 'footer',
+      description: 'Number with country code, no + or spaces. E.g. 919177822018',
+      initialValue: '919177822018',
+    },
+    {
+      name: 'youtubeUrl',
+      title: 'YouTube Channel URL',
+      type: 'url',
+      group: 'footer',
+    },
+    {
+      name: 'linkedinUrl',
+      title: 'LinkedIn Page URL',
+      type: 'url',
+      group: 'footer',
+    },
+    {
+      name: 'twitterUrl',
+      title: 'X (Twitter) URL',
+      type: 'url',
+      group: 'footer',
+    },
+    {
+      name: 'pinterestUrl',
+      title: 'Pinterest URL',
+      type: 'url',
+      group: 'footer',
+      description: 'Great for interior design inspiration boards.',
+    },
   ],
+
   orderings: [
     { title: 'Newest First', name: 'createdDesc', by: [{ field: '_createdAt', direction: 'desc' }] },
   ],
@@ -273,7 +321,7 @@ export default {
     prepare({ title, subtitle, active }: any) {
       return {
         title: `${active === false ? '⏸ ' : '✅ '}${title || 'Untitled LP'}`,
-        subtitle: subtitle ? `/lp/${subtitle}` : 'No slug set',
+        subtitle: subtitle ? `parxinteriors.com/${subtitle}` : 'No slug set',
       }
     },
   },
