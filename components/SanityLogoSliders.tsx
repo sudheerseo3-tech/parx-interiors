@@ -48,7 +48,7 @@ export function BuilderLogosSection() {
   return (
     <LogoSlider
       items={logos}
-      title='<div class="parx-accent-line mx-auto"></div><h2 class="font-display font-light text-parx-black text-2xl md:text-3xl">Trusted by <em class="italic text-parx-red">homeowners at</em></h2>'
+      title='<div class="parx-accent-line mx-auto"></div><h2 class="font-display font-light text-parx-black text-2xl md:text-3xl">Homes we&apos;ve <em class="italic text-parx-red">transformed</em></h2><p class="text-parx-gray text-sm mt-3 font-sans">Trusted by residents across Hyderabad&apos;s finest communities</p>'
     />
   )
 }
@@ -69,7 +69,7 @@ export function BrandLogosSection() {
   return (
     <LogoSlider
       items={logos}
-      title='<div class="parx-accent-line mx-auto"></div><h2 class="font-display font-light text-parx-black text-2xl md:text-3xl">Powering <em class="italic text-parx-red">Your Space</em></h2>'
+      title='<div class="parx-accent-line mx-auto"></div><h2 class="font-display font-light text-parx-black text-2xl md:text-3xl">Built with <em class="italic text-parx-red">the best</em></h2><p class="text-parx-gray text-sm mt-3 font-sans">Premium materials &amp; hardware trusted by professionals</p>'
       speed="slow"
     />
   )

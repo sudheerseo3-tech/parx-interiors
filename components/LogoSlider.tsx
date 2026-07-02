@@ -11,19 +11,21 @@ function LogoCard({ item }: { item: LogoItem }) {
 
   if (!item.logo || imgError) {
     return (
-      <div className="flex-shrink-0 h-20 w-44 bg-white border border-parx-border flex items-center justify-center px-4 hover:border-parx-red transition-colors">
-        <span className="text-parx-black text-xs text-center font-medium leading-tight">{item.name}</span>
+      <div className="flex-shrink-0 h-16 w-40 flex items-center justify-center px-4 group">
+        <span className="text-parx-gray/50 group-hover:text-parx-black text-xs text-center font-medium leading-tight tracking-wide transition-all duration-300">
+          {item.name}
+        </span>
       </div>
     )
   }
 
   return (
-    <div className="flex-shrink-0 h-20 w-44 bg-white border border-parx-border flex items-center justify-center px-3 hover:border-parx-red transition-colors">
+    <div className="flex-shrink-0 h-16 w-40 flex items-center justify-center px-3 group">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={item.logo}
         alt={item.name}
-        className="max-h-14 max-w-[140px] object-contain"
+        className="max-h-12 max-w-[130px] object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-400"
         loading="lazy"
         onError={() => setImgError(true)}
       />
@@ -37,8 +39,8 @@ export function LogoSlider({ items, title, speed = 'normal' }: { items: LogoItem
   const isHtml = title.includes('<')
 
   return (
-    <section className="bg-parx-cream py-16 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 mb-8 text-center">
+    <section className="bg-white py-16 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 mb-10 text-center">
         {isHtml ? (
           <div dangerouslySetInnerHTML={{ __html: title }} />
         ) : (
@@ -46,7 +48,7 @@ export function LogoSlider({ items, title, speed = 'normal' }: { items: LogoItem
         )}
       </div>
       <div className="relative">
-        <div className={`flex ${speed === 'slow' ? 'animate-scroll-slow' : 'animate-scroll'} gap-10 items-center`}>
+        <div className={`flex gap-6 items-center ${speed === 'slow' ? 'animate-scroll-slow' : 'animate-scroll'}`}>
           {doubled.map((b, i) => (
             <LogoCard key={`${b.name}-${i}`} item={b} />
           ))}

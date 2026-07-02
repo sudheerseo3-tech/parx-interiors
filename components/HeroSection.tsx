@@ -91,7 +91,7 @@ export default function HeroSection({
               {lastLine.includes('Finesse') ? (
                 <>
                   {lastLine.replace('Finesse.', '').replace('Finesse', '')}
-                  <em className="italic text-parx-red">Finesse.</em>
+                  <em className="italic not-italic" style={{ color: '#D63E73', textShadow: '0 0 40px rgba(214,62,115,0.5), 0 0 80px rgba(214,62,115,0.2)', fontStyle: 'italic' }}>Finesse.</em>
                 </>
               ) : (
                 <span>{lastLine}</span>
