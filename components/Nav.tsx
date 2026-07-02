@@ -51,10 +51,10 @@ export default function Nav() {
             <img src={logo} alt="Parx Interiors" className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-7 md:h-8' : 'h-8 md:h-9'}`} />
           ) : (
             <div className="flex flex-col leading-none">
-              <span className={`font-display tracking-[0.15em] text-parx-black transition-all ${scrolled ? 'text-base md:text-lg' : 'text-lg md:text-xl'}`}>
+              <span className={`font-sans font-black tracking-tight text-parx-black transition-all ${scrolled ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'}`}>
                 PAR<span className="text-parx-red">X</span>
               </span>
-              <span className="text-[6px] md:text-[7px] tracking-[0.3em] text-parx-gray mt-0.5 font-sans">INTERIORS</span>
+              <span className="text-[7px] md:text-[8px] tracking-[0.35em] text-parx-gray mt-0.5 font-sans font-medium">INTERIORS</span>
             </div>
           )}
         </Link>

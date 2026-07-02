@@ -36,10 +36,10 @@ export default function Footer() {
               <img src={logo} alt="Parx Interiors" className="h-9 w-auto object-contain mb-5 brightness-0 invert" />
             ) : (
               <div className="flex flex-col leading-none mb-5">
-                <span className="font-display text-xl tracking-[0.15em] text-white">
+                <span className="font-sans font-black text-2xl tracking-tight text-white">
                   PAR<span className="text-parx-red">X</span>
                 </span>
-                <span className="text-[7px] tracking-[0.3em] text-white/40 mt-0.5 font-sans">INTERIORS</span>
+                <span className="text-[8px] tracking-[0.35em] text-white/50 mt-0.5 font-sans font-medium">INTERIORS</span>
               </div>
             )}
             <p className="text-white/60 text-sm font-sans leading-relaxed max-w-xs mb-1">

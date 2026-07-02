@@ -7,20 +7,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'parx-black':    '#1A1A1A',
-        'parx-dark':     '#2A2A2A',
-        'parx-red':      '#C8102E',
-        'parx-red-dark': '#A00D24',
+        'parx-black':    '#1B1B1B',
+        'parx-dark':     '#202020',
+        'parx-red':      '#D63E73',
+        'parx-red-dark': '#B8325F',
         'parx-white':    '#FFFFFF',
-        'parx-cream':    '#F5F2EE',
-        'parx-light':    '#F8F8F8',
-        'parx-gray':     '#6B7280',
-        'parx-gray-light':'#E5E7EB',
-        'parx-border':   '#E5E7EB',
+        'parx-cream':    '#FAF8F6',
+        'parx-light':    '#F3F3F3',
+        'parx-gray':     '#5C5C5C',
+        'parx-gray-light':'#E6E6E6',
+        'parx-border':   '#E6E6E6',
       },
       fontFamily: {
-        'display': ['Cormorant Garamond', 'Georgia', 'serif'],
-        'sans':    ['DM Sans', 'Helvetica', 'sans-serif'],
+        'display': ['Playfair Display', 'Georgia', 'serif'],
+        'sans':    ['Manrope', 'Helvetica', 'sans-serif'],
         'mono':    ['JetBrains Mono', 'monospace'],
       },
       animation: {
