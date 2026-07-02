@@ -7,5 +7,6 @@ import builderLogo from './builderLogo'
 import brandLogo from './brandLogo'
 import siteSettings from './siteSettings'
 import service from './service'
+import landingPage from './landingPage'
 
-export const schemaTypes = [siteSettings, service, blogPost, project, review, teamMember, faq, builderLogo, brandLogo]
+export const schemaTypes = [landingPage, siteSettings, service, blogPost, project, review, teamMember, faq, builderLogo, brandLogo]
