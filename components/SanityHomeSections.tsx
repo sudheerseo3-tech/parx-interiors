@@ -204,7 +204,6 @@ function TestimonialCard({ review, index }: { review: any; index: number }) {
 
 export function Testimonials() {
   const [reviews, setReviews] = useState<any[]>(fallbackTestimonials)
-  const [trustVisible, setTrustVisible] = useState(false)
   const [ctaVisible, setCtaVisible] = useState(false)
 
   useEffect(() => {
@@ -216,15 +215,10 @@ export function Testimonials() {
   }, [])
 
   useEffect(() => {
-    const trustEl = document.getElementById('trust-block')
     const ctaEl = document.getElementById('reviews-cta')
-    if (trustEl) {
-      const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setTrustVisible(true); obs.disconnect() } }, { threshold: 0.2 })
-      obs.observe(trustEl)
-    }
     if (ctaEl) {
-      const obs2 = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setCtaVisible(true); obs2.disconnect() } }, { threshold: 0.2 })
-      obs2.observe(ctaEl)
+      const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setCtaVisible(true); obs.disconnect() } }, { threshold: 0.2 })
+      obs.observe(ctaEl)
     }
   }, [])
 
@@ -251,59 +245,6 @@ export function Testimonials() {
           {reviews.slice(0, 3).map((review, i) => (
             <TestimonialCard key={i} review={review} index={i} />
           ))}
-        </div>
-
-        {/* Trust Block */}
-        <div
-          id="trust-block"
-          className="text-center py-16 md:py-20 px-6 rounded-[20px] mb-12 transition-all duration-700"
-          style={{
-            background: '#ffffff',
-            boxShadow: '0 2px 24px rgba(0,0,0,0.05)',
-            opacity: trustVisible ? 1 : 0,
-            transform: trustVisible ? 'translateY(0)' : 'translateY(20px)',
-          }}
-        >
-          <div className="flex justify-center gap-1.5 mb-6">
-            {[...Array(5)].map((_, i) => (
-              <svg key={i} width="22" height="22" viewBox="0 0 24 24" fill="#D63E73">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-            ))}
-          </div>
-          <h3 className="font-display font-light text-parx-black mb-4" style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)' }}>
-            Trusted by Families Across Hyderabad
-          </h3>
-          <p className="font-sans text-parx-gray text-sm leading-relaxed max-w-md mx-auto">
-            Every home we design is crafted with attention to detail, transparent communication, and professional execution.
-          </p>
-        </div>
-
-        {/* Appreciation Message */}
-        <div className="max-w-lg mx-auto mb-20">
-          <div className="bg-white rounded-[20px] p-8 relative"
-            style={{ boxShadow: '0 2px 20px rgba(0,0,0,0.06)' }}>
-            <div className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-sans font-bold mb-5"
-              style={{ background: '#D63E73' }}>
-              S
-            </div>
-            <svg className="absolute top-8 right-8 opacity-10" width="32" height="32" viewBox="0 0 24 24" fill="#1B1B1B">
-              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.293-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.293-3.996 5.849h3.983v10h-9.983z"/>
-            </svg>
-            <p className="font-sans text-parx-black/80 text-sm leading-relaxed mb-1">
-              &ldquo;Thank you, Parx team.
-            </p>
-            <p className="font-sans text-parx-black/80 text-sm leading-relaxed mb-1">
-              The final interiors looked exactly like the 3D design.
-            </p>
-            <p className="font-sans text-parx-black/80 text-sm leading-relaxed">
-              The entire process was smooth and transparent.&rdquo;
-            </p>
-            <div className="mt-5 pt-5 border-t border-parx-border">
-              <div className="text-parx-black text-xs font-sans font-semibold">Sravani T.</div>
-              <div className="text-parx-gray text-xs font-sans mt-0.5">Hitech City, Hyderabad · Full Home Interior</div>
-            </div>
-          </div>
         </div>
 
         {/* CTA Block */}
