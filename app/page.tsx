@@ -7,7 +7,8 @@ import WhatsAppButton from '@/components/WhatsAppButton'
 import HeroSection from '@/components/HeroSection'
 import ValueCards from '@/components/ValueCards'
 import { BuilderLogosSection, BrandLogosSection } from '@/components/SanityLogoSliders'
-import { PortfolioPreview as SanityPortfolio, Testimonials as SanityTestimonials } from '@/components/SanityHomeSections'
+import { PortfolioPreview as SanityPortfolio } from '@/components/SanityHomeSections'
+import WhatsAppReviews from '@/components/WhatsAppReviews'
 import ServicesSection from '@/components/ServicesSection'
 
 
@@ -167,7 +168,7 @@ export default function HomePage() {
         <FactoryUSP />
         <SanityPortfolio />
         <Process />
-        <SanityTestimonials />
+        <WhatsAppReviews />
         <BuilderLogosSection />
         <BrandLogosSection />
         <CostCalculatorCTA />
