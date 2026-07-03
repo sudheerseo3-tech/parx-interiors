@@ -122,9 +122,10 @@ function TrustBar({ builders, brands }: { builders: any[]; brands: any[] }) {
 
   return (
     <section className="bg-white py-12 overflow-hidden border-y border-parx-border">
-      <p className="text-center text-parx-gray text-[10px] font-sans tracking-[0.3em] uppercase mb-8">
-        Trusted by residents of these communities · Built with these premium brands
-      </p>
+      <div className="text-center mb-8">
+        <p className="font-display font-light text-parx-black text-lg md:text-xl mb-1">Homes we've transformed</p>
+        <p className="text-parx-gray text-[11px] font-sans tracking-[0.2em] uppercase">Trusted by residents across Hyderabad's finest communities</p>
+      </div>
       <div className="relative">
         <div className="flex gap-10 items-center animate-scroll">
           {doubled.map((logo: any, i: number) => {
