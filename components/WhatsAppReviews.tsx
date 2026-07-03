@@ -1,15 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 
-const PROJECT_ID = 'dx9xg01d'
-const DATASET = 'production'
-
-function sanityImg(ref: string, w = 400) {
-  if (!ref) return ''
-  const [, id, dim, fmt] = ref.split('-')
-  return `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}/${id}-${dim}.${fmt}?w=${w}&fit=crop&auto=format`
-}
-
 // ─── Conversation data ────────────────────────────────────────────────────────
 // from = 'parx'   → RIGHT side, green bubble (our messages on our phone)
 // from = 'client' → LEFT side, white bubble (their messages)
@@ -18,20 +9,18 @@ const CONVERSATIONS = [
   {
     contact: { name: 'Priya R.', initials: 'P', bg: '#A8D5BA' },
     messages: [
-      { from: 'client', text: 'Priya this side! Moved in yesterday and had to send you this immediately 🥹',     time: '10:18 AM' },
-      { from: 'client', type: 'photo', slot: 0,                                                                 time: '10:19 AM' },
-      { from: 'client', type: 'photo', slot: 1,                                                                 time: '10:19 AM' },
-      { from: 'client', text: 'Kitchen came out so beautiful honestly. Better than what we imagined 😍',        time: '10:21 AM' },
-      { from: 'parx',   text: 'Priya ji!! 🙏🙏 This looks absolutely stunning. Our team will be so happy seeing this 😊', time: '10:35 AM' },
-      { from: 'client', text: 'Already told 3 neighbours. Two are planning interiors. Giving your number 😊',   time: '10:38 AM' },
+      { from: 'client', text: 'Priya this side! Moved in yesterday and had to message you immediately 🥹',     time: '10:18 AM' },
+      { from: 'client', text: 'Kitchen came out so beautiful honestly. Better than what we imagined 😍',        time: '10:19 AM' },
+      { from: 'parx',   text: 'Priya ji!! 🙏🙏 This is the best news. Our team will be so happy to hear this 😊', time: '10:35 AM' },
+      { from: 'client', text: 'Already told 3 neighbours about Parx. Two are very serious about starting their interiors 😊', time: '10:38 AM' },
+      { from: 'parx',   text: 'This genuinely means a lot to us. Thank you so much Priya ji 🙏',              time: '10:40 AM' },
     ]
   },
   {
     contact: { name: 'Karthik M.', initials: 'K', bg: '#B5C7E8' },
     messages: [
-      { from: 'client', text: 'Karthik this side. Handover done today 🙌',                                     time: '3:52 PM' },
-      { from: 'client', type: 'photo', slot: 2,                                                                 time: '3:53 PM' },
-      { from: 'client', text: 'Exactly as we planned. Not a single compromise on quality',                      time: '3:55 PM' },
+      { from: 'client', text: 'Karthik this side. Handover done today 🙌 Had to message immediately',          time: '3:52 PM' },
+      { from: 'client', text: 'Exactly as we planned. Not a single compromise on quality',                      time: '3:53 PM' },
       { from: 'parx',   text: 'Karthik ji!! Congratulations 🎉 This means everything to us. Thank you for trusting Parx 🙏', time: '4:08 PM' },
       { from: 'client', text: 'Quality is top notch bhai. Will definitely refer everyone I know',               time: '4:11 PM' },
     ]
@@ -39,10 +28,10 @@ const CONVERSATIONS = [
   {
     contact: { name: 'Deepa S.', initials: 'D', bg: '#F4C5A8' },
     messages: [
-      { from: 'client', text: 'Deepa here! Moving in today. Look at this!! 😍😍',                              time: '8:44 PM' },
-      { from: 'client', type: 'photo', slot: 3,                                                                 time: '8:45 PM' },
-      { from: 'parx',   text: 'Deepa ji!! 🎉🎉 Congratulations! So happy to see this. Enjoy every moment 🏡', time: '8:59 PM' },
-      { from: 'client', text: 'You delivered 10 days early!! Honestly best decision we made 👏',               time: '9:03 PM' },
+      { from: 'client', text: 'Deepa here! Moving in today 🥹 Had to message you all right away',              time: '8:44 PM' },
+      { from: 'parx',   text: 'Deepa ji!! 🎉🎉 Congratulations! So happy to hear this. Enjoy every moment 🏡', time: '8:59 PM' },
+      { from: 'client', text: 'You delivered 10 days early!! Honestly the best decision we made 👏',           time: '9:03 PM' },
+      { from: 'client', text: 'My husband was skeptical at first but now he keeps telling people about Parx 😄', time: '9:04 PM' },
     ]
   },
 ]
@@ -173,26 +162,8 @@ function ChatCard({ conv, photos, visible, delay }: { conv: typeof CONVERSATIONS
 
 // ─── Main export ──────────────────────────────────────────────────────────────
 export default function WhatsAppReviews() {
-  const [photos, setPhotos] = useState<string[]>([])
   const [visible, setVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
-
-  // Fetch project images (slots 0-3 = first images from first 4 projects)
-  useEffect(() => {
-    const q = encodeURIComponent('*[_type == "project"] | order(_createdAt desc) [0...4] { gallery }')
-    fetch(`https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${q}`)
-      .then(r => r.json())
-      .then(data => {
-        const results = data.result || []
-        const firstProj = results[0]?.gallery || []
-        const img0 = firstProj[0]?.asset?._ref ? sanityImg(firstProj[0].asset._ref, 400) : ''
-        const img1 = firstProj[1]?.asset?._ref ? sanityImg(firstProj[1].asset._ref, 400) : img0
-        const img2 = results[1]?.gallery?.[0]?.asset?._ref ? sanityImg(results[1].gallery[0].asset._ref, 400) : ''
-        const img3 = results[2]?.gallery?.[0]?.asset?._ref ? sanityImg(results[2].gallery[0].asset._ref, 400) : ''
-        setPhotos([img0, img1, img2, img3])
-      })
-      .catch(() => {})
-  }, [])
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -224,7 +195,7 @@ export default function WhatsAppReviews() {
           style={{ scrollSnapType: 'x mandatory' }}>
           {CONVERSATIONS.map((conv, i) => (
             <div key={i} style={{ scrollSnapAlign: 'start' }}>
-              <ChatCard conv={conv} photos={photos} visible={visible} delay={i * 120} />
+              <ChatCard conv={conv} photos={[]} visible={visible} delay={i * 120} />
             </div>
           ))}
         </div>
