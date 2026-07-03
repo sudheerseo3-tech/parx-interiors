@@ -11,68 +11,69 @@ function sanityImg(ref: string, w = 400) {
 }
 
 // ─── Conversation data ────────────────────────────────────────────────────────
-// Photos are injected at runtime from Sanity project images
+// from = 'parx'   → RIGHT side, green bubble (our messages on our phone)
+// from = 'client' → LEFT side, white bubble (their messages)
+// photo slots: 0,1 → Priya R kitchen photos | 2 → Karthik M | 3 → Deepa S
 const CONVERSATIONS = [
   {
     contact: { name: 'Priya R.', initials: 'P', bg: '#A8D5BA' },
     messages: [
-      { from: 'parx',   text: 'Good morning Priya ji! Hope you are settling in well 😊',                     time: '10:23 AM' },
-      { from: 'client', text: 'Settling in beautifully!! 😍😍 Had to send you these photos right away',       time: '10:31 AM' },
-      { from: 'client', type: 'photo', slot: 0,                                                              time: '10:32 AM' },
-      { from: 'client', type: 'photo', slot: 1,                                                              time: '10:32 AM' },
-      { from: 'client', text: 'The kitchen is even better than the 3D design honestly 🤩',                   time: '10:33 AM' },
-      { from: 'parx',   text: 'Wow this looks absolutely stunning 🙏 Our team will be so happy to see this. Thank you so much Priya ji!', time: '10:37 AM' },
-      { from: 'client', text: 'Already told 4 people from my building about Parx. Two are very serious about starting their interiors 😊', time: '10:41 AM' },
+      { from: 'client', text: 'Priya this side! Moved in yesterday and had to send you this immediately 🥹',     time: '10:18 AM' },
+      { from: 'client', type: 'photo', slot: 0,                                                                 time: '10:19 AM' },
+      { from: 'client', type: 'photo', slot: 1,                                                                 time: '10:19 AM' },
+      { from: 'client', text: 'Kitchen came out so beautiful honestly. Better than what we imagined 😍',        time: '10:21 AM' },
+      { from: 'parx',   text: 'Priya ji!! 🙏🙏 This looks absolutely stunning. Our team will be so happy seeing this 😊', time: '10:35 AM' },
+      { from: 'client', text: 'Already told 3 neighbours. Two are planning interiors. Giving your number 😊',   time: '10:38 AM' },
     ]
   },
   {
     contact: { name: 'Karthik M.', initials: 'K', bg: '#B5C7E8' },
     messages: [
-      { from: 'client', text: 'Karthik this side. Handover done today 🙌 Had to message immediately',        time: '4:12 PM' },
-      { from: 'client', type: 'photo', slot: 2,                                                              time: '4:13 PM' },
-      { from: 'parx',   text: 'Congratulations Karthik ji! 🎉 How is everything looking?',                   time: '4:16 PM' },
-      { from: 'client', text: 'The wardrobes are exactly what we discussed. Not a single thing compromised', time: '4:18 PM' },
-      { from: 'client', type: 'photo', slot: 3,                                                              time: '4:19 PM' },
-      { from: 'parx',   text: 'This is the best message we could receive 🙏 Wishing you and your family many happy years in your new home 🏠', time: '4:23 PM' },
-      { from: 'client', text: 'Bhai honestly quality is top class. Worth every rupee. Will definitely refer to everyone I know', time: '4:26 PM' },
+      { from: 'client', text: 'Karthik this side. Handover done today 🙌',                                     time: '3:52 PM' },
+      { from: 'client', type: 'photo', slot: 2,                                                                 time: '3:53 PM' },
+      { from: 'client', text: 'Exactly as we planned. Not a single compromise on quality',                      time: '3:55 PM' },
+      { from: 'parx',   text: 'Karthik ji!! Congratulations 🎉 This means everything to us. Thank you for trusting Parx 🙏', time: '4:08 PM' },
+      { from: 'client', text: 'Quality is top notch bhai. Will definitely refer everyone I know',               time: '4:11 PM' },
     ]
   },
   {
     contact: { name: 'Deepa S.', initials: 'D', bg: '#F4C5A8' },
     messages: [
-      { from: 'client', text: 'Deepa here! We moved in today 🥹 Had to message you all immediately',         time: '8:47 PM' },
-      { from: 'client', type: 'photo', slot: 4,                                                              time: '8:48 PM' },
-      { from: 'client', type: 'photo', slot: 5,                                                              time: '8:48 PM' },
-      { from: 'parx',   text: 'Congratulations Deepa ji!! 🎉🎉 Moving day! How is everything?',              time: '8:52 PM' },
-      { from: 'client', text: 'Perfect. Exactly as promised. The team was so professional throughout the whole project', time: '8:55 PM' },
-      { from: 'client', text: 'My husband was worried about timeline initially but you all delivered 10 days early!! 👏👏', time: '8:57 PM' },
-      { from: 'parx',   text: 'This genuinely means everything to us 🙏 Thank you so much for trusting Parx with your dream home. Enjoy every moment! 🏡', time: '9:02 PM' },
+      { from: 'client', text: 'Deepa here! Moving in today. Look at this!! 😍😍',                              time: '8:44 PM' },
+      { from: 'client', type: 'photo', slot: 3,                                                                 time: '8:45 PM' },
+      { from: 'parx',   text: 'Deepa ji!! 🎉🎉 Congratulations! So happy to see this. Enjoy every moment 🏡', time: '8:59 PM' },
+      { from: 'client', text: 'You delivered 10 days early!! Honestly best decision we made 👏',               time: '9:03 PM' },
     ]
   },
 ]
 
 // ─── Single message bubble ────────────────────────────────────────────────────
+// parx  = green, right (our messages on our phone)
+// client = white, left
 function Bubble({ msg, photos }: { msg: any; photos: string[] }) {
-  const isClient = msg.from === 'client'
+  const isParx = msg.from === 'parx'
 
   if (msg.type === 'photo') {
     const src = photos[msg.slot] || ''
     return (
-      <div className={`flex ${isClient ? 'justify-end' : 'justify-start'} mb-1`}>
+      <div className={`flex ${isParx ? 'justify-end' : 'justify-start'} mb-1`}>
         <div className="relative rounded-lg overflow-hidden shadow-sm"
-          style={{ width: 160, height: 120, background: '#ccc', maxWidth: '65%' }}>
+          style={{ width: 160, height: 120, background: '#d0d0d0', maxWidth: '65%' }}>
           {src ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={src} alt="Project photo" className="w-full h-full object-cover" loading="lazy" />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-gray-200">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
             </div>
           )}
-          {/* timestamp overlay */}
           <div className="absolute bottom-1 right-2 flex items-center gap-0.5">
             <span className="text-white text-[10px] font-sans drop-shadow">{msg.time}</span>
-            {isClient && (
+            {isParx && (
               <svg width="14" height="10" viewBox="0 0 16 11" fill="none" className="drop-shadow">
                 <path d="M1 6l3.5 3.5L10 2" stroke="#53BDEB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M6 6l3.5 3.5L15 2" stroke="#53BDEB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -85,10 +86,10 @@ function Bubble({ msg, photos }: { msg: any; photos: string[] }) {
   }
 
   return (
-    <div className={`flex ${isClient ? 'justify-end' : 'justify-start'} mb-1`}>
+    <div className={`flex ${isParx ? 'justify-end' : 'justify-start'} mb-1`}>
       <div className="relative max-w-[72%]">
-        {/* Tail */}
-        {isClient ? (
+        {/* Bubble tail */}
+        {isParx ? (
           <div className="absolute -right-1.5 top-0 w-0 h-0"
             style={{ borderLeft: '8px solid #DCF8C6', borderBottom: '8px solid transparent' }} />
         ) : (
@@ -96,11 +97,11 @@ function Bubble({ msg, photos }: { msg: any; photos: string[] }) {
             style={{ borderRight: '8px solid #FFFFFF', borderBottom: '8px solid transparent' }} />
         )}
         <div className="rounded-lg px-3 py-2 shadow-sm"
-          style={{ background: isClient ? '#DCF8C6' : '#FFFFFF' }}>
+          style={{ background: isParx ? '#DCF8C6' : '#FFFFFF' }}>
           <p className="font-sans text-[13px] leading-[1.4] text-gray-800 mb-1">{msg.text}</p>
           <div className="flex items-center justify-end gap-1">
             <span className="text-[10px] font-sans text-gray-400">{msg.time}</span>
-            {isClient && (
+            {isParx && (
               <svg width="14" height="10" viewBox="0 0 16 11" fill="none">
                 <path d="M1 6l3.5 3.5L10 2" stroke="#53BDEB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M6 6l3.5 3.5L15 2" stroke="#53BDEB" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -113,18 +114,18 @@ function Bubble({ msg, photos }: { msg: any; photos: string[] }) {
   )
 }
 
-// ─── Single chat card (phone frame) ──────────────────────────────────────────
-function ChatCard({ conv, photos, visible }: { conv: typeof CONVERSATIONS[0]; photos: string[]; visible: boolean }) {
+// ─── Single chat card ─────────────────────────────────────────────────────────
+function ChatCard({ conv, photos, visible, delay }: { conv: typeof CONVERSATIONS[0]; photos: string[]; visible: boolean; delay: number }) {
   return (
-    <div className="flex-shrink-0 w-72 md:w-80 rounded-2xl overflow-hidden shadow-xl transition-all duration-700"
+    <div className="flex-shrink-0 w-72 md:w-80 rounded-2xl overflow-hidden shadow-xl"
       style={{
-        transform: visible ? 'translateY(0)' : 'translateY(32px)',
+        transform: visible ? 'translateY(0)' : 'translateY(28px)',
         opacity: visible ? 1 : 0,
+        transition: `transform 0.6s ease ${delay}ms, opacity 0.6s ease ${delay}ms`,
       }}>
 
-      {/* WhatsApp header */}
+      {/* Header */}
       <div className="flex items-center gap-3 px-3 py-2.5" style={{ background: '#075E54' }}>
-        {/* Avatar */}
         <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 font-sans font-bold text-white text-sm"
           style={{ background: conv.contact.bg }}>
           {conv.contact.initials}
@@ -133,7 +134,6 @@ function ChatCard({ conv, photos, visible }: { conv: typeof CONVERSATIONS[0]; ph
           <p className="text-white text-sm font-sans font-semibold leading-tight truncate">{conv.contact.name}</p>
           <p className="text-white/60 text-[11px] font-sans">online</p>
         </div>
-        {/* WhatsApp icons */}
         <div className="flex items-center gap-4 text-white/70">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.07 1.18 2 2 0 012.07 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
@@ -144,19 +144,19 @@ function ChatCard({ conv, photos, visible }: { conv: typeof CONVERSATIONS[0]; ph
         </div>
       </div>
 
-      {/* Chat background */}
+      {/* Chat area */}
       <div className="px-2 py-3 space-y-0.5 overflow-y-auto" style={{
         background: '#E5DDD5',
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4c9c0' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        minHeight: 340,
-        maxHeight: 380,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8bdb5' fill-opacity='0.25'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        minHeight: 280,
+        maxHeight: 360,
       }}>
         {conv.messages.map((msg, i) => (
           <Bubble key={i} msg={msg} photos={photos} />
         ))}
       </div>
 
-      {/* Typing bar (decorative) */}
+      {/* Typing bar */}
       <div className="flex items-center gap-2 px-3 py-2" style={{ background: '#F0F0F0' }}>
         <div className="flex-1 rounded-full bg-white px-4 py-2">
           <p className="text-gray-400 text-xs font-sans">Type a message</p>
@@ -177,9 +177,9 @@ export default function WhatsAppReviews() {
   const [visible, setVisible] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
 
-  // Fetch project images from Sanity
+  // Fetch project images (slots 0-3 = first images from first 4 projects)
   useEffect(() => {
-    const q = encodeURIComponent('*[_type == "project"] | order(_createdAt desc) [0...6] { images }')
+    const q = encodeURIComponent('*[_type == "project"] | order(_createdAt desc) [0...4] { images }')
     fetch(`https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${q}`)
       .then(r => r.json())
       .then(data => {
@@ -187,17 +187,23 @@ export default function WhatsAppReviews() {
         ;(data.result || []).forEach((proj: any) => {
           const arr = proj.images || []
           if (arr[0]?.asset?._ref) imgs.push(sanityImg(arr[0].asset._ref, 400))
+          else imgs.push('')
         })
-        setPhotos(imgs)
+        // Ensure 4 slots
+        while (imgs.length < 4) imgs.push('')
+        // slots 0,1 need 2 images for Priya R — use first two projects
+        // Insert a second slot from project 0 if available
+        const p0imgs = (data.result?.[0]?.images || [])
+        const second = p0imgs[1]?.asset?._ref ? sanityImg(p0imgs[1].asset._ref, 400) : imgs[0]
+        setPhotos([imgs[0], second, imgs[1], imgs[2]])
       })
       .catch(() => {})
   }, [])
 
-  // Intersection observer for fade-in
   useEffect(() => {
     const obs = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     )
     if (sectionRef.current) obs.observe(sectionRef.current)
     return () => obs.disconnect()
@@ -215,25 +221,21 @@ export default function WhatsAppReviews() {
             <em className="italic" style={{ color: '#D63E73' }}>WhatsApp</em>
           </h2>
           <p className="font-sans text-parx-gray text-sm max-w-md">
-            Real messages from homeowners who trusted Parx with their dream home — shared with their permission.
+            Real messages from homeowners — shared with their permission.
           </p>
         </div>
 
-        {/* Chat cards — horizontal scroll on mobile, 3-col on desktop */}
-        <div className="flex gap-5 overflow-x-auto pb-4 md:overflow-visible md:grid md:grid-cols-3 scrollbar-hide"
+        {/* Chat cards */}
+        <div className="flex gap-5 overflow-x-auto pb-4 md:overflow-visible md:grid md:grid-cols-3"
           style={{ scrollSnapType: 'x mandatory' }}>
           {CONVERSATIONS.map((conv, i) => (
-            <div key={i} style={{
-              scrollSnapAlign: 'start',
-              transitionDelay: `${i * 120}ms`,
-            }}>
-              <ChatCard conv={conv} photos={photos} visible={visible} />
+            <div key={i} style={{ scrollSnapAlign: 'start' }}>
+              <ChatCard conv={conv} photos={photos} visible={visible} delay={i * 120} />
             </div>
           ))}
         </div>
 
-        {/* Footer note */}
-        <p className="text-center font-sans text-parx-gray/50 text-xs mt-10">
+        <p className="text-center font-sans text-parx-gray/40 text-xs mt-10">
           Names shortened for privacy. Messages shared with homeowner consent.
         </p>
       </div>
