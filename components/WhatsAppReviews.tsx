@@ -179,23 +179,17 @@ export default function WhatsAppReviews() {
 
   // Fetch project images (slots 0-3 = first images from first 4 projects)
   useEffect(() => {
-    const q = encodeURIComponent('*[_type == "project"] | order(_createdAt desc) [0...4] { images }')
+    const q = encodeURIComponent('*[_type == "project"] | order(_createdAt desc) [0...4] { gallery }')
     fetch(`https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${q}`)
       .then(r => r.json())
       .then(data => {
-        const imgs: string[] = []
-        ;(data.result || []).forEach((proj: any) => {
-          const arr = proj.images || []
-          if (arr[0]?.asset?._ref) imgs.push(sanityImg(arr[0].asset._ref, 400))
-          else imgs.push('')
-        })
-        // Ensure 4 slots
-        while (imgs.length < 4) imgs.push('')
-        // slots 0,1 need 2 images for Priya R — use first two projects
-        // Insert a second slot from project 0 if available
-        const p0imgs = (data.result?.[0]?.images || [])
-        const second = p0imgs[1]?.asset?._ref ? sanityImg(p0imgs[1].asset._ref, 400) : imgs[0]
-        setPhotos([imgs[0], second, imgs[1], imgs[2]])
+        const results = data.result || []
+        const firstProj = results[0]?.gallery || []
+        const img0 = firstProj[0]?.asset?._ref ? sanityImg(firstProj[0].asset._ref, 400) : ''
+        const img1 = firstProj[1]?.asset?._ref ? sanityImg(firstProj[1].asset._ref, 400) : img0
+        const img2 = results[1]?.gallery?.[0]?.asset?._ref ? sanityImg(results[1].gallery[0].asset._ref, 400) : ''
+        const img3 = results[2]?.gallery?.[0]?.asset?._ref ? sanityImg(results[2].gallery[0].asset._ref, 400) : ''
+        setPhotos([img0, img1, img2, img3])
       })
       .catch(() => {})
   }, [])
