@@ -123,7 +123,7 @@ function TrustBar({ builders, brands }: { builders: any[]; brands: any[] }) {
   return (
     <section className="bg-white py-12 overflow-hidden border-y border-parx-border">
       <div className="text-center mb-8">
-        <p className="font-display font-light text-parx-black text-lg md:text-xl mb-1">Homes we've transformed</p>
+        <p className="font-display font-light text-parx-black text-lg md:text-xl mb-1">Homes we've <em className="italic" style={{ color: '#D63E73' }}>transformed</em></p>
         <p className="text-parx-gray text-[11px] font-sans tracking-[0.2em] uppercase">Trusted by residents across Hyderabad's finest communities</p>
       </div>
       <div className="relative">
