@@ -6,8 +6,9 @@ import LpFaq from './LpFaq'
 import LpSticky from './LpSticky'
 
 // Dynamic imports for heavy interactive sections
-const LpBeforeAfter = dynamic(() => import('./LpBeforeAfter'), { ssr: false })
-const LpCalculator  = dynamic(() => import('./LpCalculator'),  { ssr: false })
+const LpBeforeAfter    = dynamic(() => import('./LpBeforeAfter'),    { ssr: false })
+const LpCalculator     = dynamic(() => import('./LpCalculator'),     { ssr: false })
+const LpWhatsAppFloat  = dynamic(() => import('./LpWhatsAppFloat'),  { ssr: false })
 
 // ─── Sanity ──────────────────────────────────────────────────────────────────
 const PROJECT_ID = 'dx9xg01d'
@@ -466,6 +467,7 @@ export default async function LandingPage({ params }: { params: { slug: string }
       />
 
       <LpSticky ctaLabel={lp.heroPrimaryCta || 'Book Free Consultation'} />
+      <LpWhatsAppFloat number={whatsapp} />
     </>
   )
 }
