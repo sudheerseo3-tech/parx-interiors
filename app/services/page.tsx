@@ -51,7 +51,7 @@ export default async function ServicesPage() {
 
   return (
     <>
-      <JsonLd schema={[
+      <JsonLd schemas={[
         ...allServicesSchema(),
         breadcrumbSchema([{ name: 'Services', href: '/services' }]),
       ]} />

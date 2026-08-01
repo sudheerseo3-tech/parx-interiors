@@ -17,7 +17,7 @@ const faqItems = [
 export default function FaqLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <JsonLd schema={[
+      <JsonLd schemas={[
         faqSchema(faqItems),
         breadcrumbSchema([{ name: 'FAQ', href: '/faq' }]),
       ]} />

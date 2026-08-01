@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
   return (
     <>
-      <JsonLd schema={[
+      <JsonLd schemas={[
         blogPostingSchema({
           title: post.title,
           description: post.excerpt || post.seoDescription || '',

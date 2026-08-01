@@ -1,11 +1,13 @@
+import type { WithContext, BreadcrumbList } from 'schema-dts'
 import { seoConfig } from '../seo.config'
+import { createUrl } from '../helpers/createUrl'
 
 export interface BreadcrumbItem {
   name: string
   href: string
 }
 
-export function breadcrumbSchema(items: BreadcrumbItem[]) {
+export function breadcrumbSchema(items: BreadcrumbItem[]): WithContext<BreadcrumbList> {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -17,10 +19,10 @@ export function breadcrumbSchema(items: BreadcrumbItem[]) {
         item: seoConfig.website,
       },
       ...items.map((item, i) => ({
-        '@type': 'ListItem',
+        '@type': 'ListItem' as const,
         position: i + 2,
         name: item.name,
-        item: `${seoConfig.website}${item.href}`,
+        item: createUrl(item.href),
       })),
     ],
   }

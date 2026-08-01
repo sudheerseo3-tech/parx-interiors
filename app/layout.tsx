@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import JsonLd from '@/components/JsonLd'
-import { organizationSchema, localBusinessSchema, websiteSchema } from '@/lib/seo'
+import { organizationSchema, websiteSchema } from '@/lib/seo'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -42,9 +42,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         {/* Global structured data — present on every page */}
-        <JsonLd schema={[
+        {/* Organization + WebSite on every page. LocalBusiness only on Home + Contact. */}
+        <JsonLd schemas={[
           organizationSchema(),
-          localBusinessSchema(),
           websiteSchema(),
         ]} />
       </head>

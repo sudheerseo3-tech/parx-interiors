@@ -5,6 +5,8 @@ import PageHero from '@/components/PageHero'
 import Link from 'next/link'
 import { sanityFetch, sanityImageUrl } from '@/lib/sanityFetch'
 import type { Metadata } from 'next'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbSchema } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -20,6 +22,7 @@ export default async function ProjectsPage() {
 
   return (
     <>
+      <JsonLd schemas={breadcrumbSchema([{ name: 'Projects', href: '/projects' }])} />
       <Nav />
       <main>
         <PageHero

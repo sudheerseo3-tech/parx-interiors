@@ -5,6 +5,8 @@ import PageHero from '@/components/PageHero'
 import { BuilderLogosSection } from '@/components/SanityLogoSliders'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import JsonLd from '@/components/JsonLd'
+import { breadcrumbSchema } from '@/lib/seo'
 
 const PROJECT_ID = 'dx9xg01d'
 const DATASET = 'production'
@@ -38,6 +40,7 @@ export default async function AboutPage() {
 
   return (
     <>
+      <JsonLd schemas={breadcrumbSchema([{ name: 'About', href: '/about' }])} />
       <Nav />
       <main>
         <PageHero

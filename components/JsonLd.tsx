@@ -1,16 +1,16 @@
-// Server component — no 'use client' needed.
-// Safely renders one or many JSON-LD schema objects into <script> tags.
+import type { JsonLdInput } from '@/lib/seo/types/schema'
 
 interface JsonLdProps {
-  schema: Record<string, unknown> | Record<string, unknown>[]
+  schemas: JsonLdInput | JsonLdInput[]
 }
 
-export default function JsonLd({ schema }: JsonLdProps) {
-  const schemas = Array.isArray(schema) ? schema : [schema]
-
+// Server component — no 'use client' needed.
+// Accepts one schema, an array of schemas, or an array of arrays.
+export default function JsonLd({ schemas }: JsonLdProps) {
+  const flat = (Array.isArray(schemas) ? schemas : [schemas]).flat()
   return (
     <>
-      {schemas.map((s, i) => (
+      {flat.map((s, i) => (
         <script
           key={i}
           type="application/ld+json"

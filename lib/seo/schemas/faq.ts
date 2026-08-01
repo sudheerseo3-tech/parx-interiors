@@ -1,9 +1,11 @@
+import type { WithContext, FAQPage } from 'schema-dts'
+
 export interface FaqItem {
   question: string
   answer: string
 }
 
-export function faqSchema(items: FaqItem[]) {
+export function faqSchema(items: FaqItem[]): WithContext<FAQPage> {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',

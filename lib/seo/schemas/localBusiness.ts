@@ -1,14 +1,17 @@
+import type { WithContext, LocalBusiness } from 'schema-dts'
 import { seoConfig } from '../seo.config'
+import { createAddress } from '../helpers/createAddress'
+import { createId, createUrl } from '../helpers/createUrl'
 
-export function localBusinessSchema() {
+export function localBusinessSchema(): WithContext<LocalBusiness> {
   const s = seoConfig
   return {
     '@context': 'https://schema.org',
-    '@type': ['LocalBusiness', 'InteriorDesigner'],
-    '@id': `${s.website}/#localbusiness`,
+    '@type': 'LocalBusiness',
+    '@id': createId('localbusiness'),
     name: s.companyName,
     description: s.description,
-    url: s.website,
+    url: createUrl(),
     telephone: s.phone,
     email: s.email,
     logo: s.logo,
@@ -16,14 +19,7 @@ export function localBusinessSchema() {
     priceRange: s.priceRange,
     currenciesAccepted: 'INR',
     paymentAccepted: 'Cash, Bank Transfer, UPI',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: s.address.street,
-      addressLocality: s.address.city,
-      addressRegion: s.address.state,
-      postalCode: s.address.postalCode,
-      addressCountry: s.address.country,
-    },
+    address: createAddress(),
     geo: {
       '@type': 'GeoCoordinates',
       latitude: s.geo.latitude,
@@ -39,7 +35,7 @@ export function localBusinessSchema() {
     ],
     areaServed: [
       { '@type': 'City', name: 'Hyderabad' },
-      { '@type': 'State', name: 'Telangana' },
+      { '@type': 'AdministrativeArea', name: 'Telangana' },
     ],
     hasMap: `https://www.google.com/maps/search/?api=1&query=${s.geo.latitude},${s.geo.longitude}`,
     aggregateRating: {
@@ -49,9 +45,7 @@ export function localBusinessSchema() {
       bestRating: '5',
       worstRating: '1',
     },
-    sameAs: Object.values(s.socialLinks).filter(Boolean),
-    parentOrganization: {
-      '@id': `${s.website}/#organization`,
-    },
+    sameAs: Object.values(s.socialLinks).filter(Boolean) as string[],
+    parentOrganization: { '@id': createId('organization') } as any,
   }
 }
