@@ -5,7 +5,7 @@ export function createImage(url?: string, width = 1200, height = 630): ImageObje
   return {
     '@type': 'ImageObject',
     url: url || seoConfig.ogImage,
-    width,
-    height,
+    width: width.toString(),
+    height: height.toString(),
   }
 }
