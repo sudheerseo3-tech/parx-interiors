@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import JsonLd from '@/components/JsonLd'
+import { organizationSchema, localBusinessSchema, websiteSchema } from '@/lib/seo'
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -39,46 +41,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        {/* Local Business Schema for Google */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'InteriorDesigner',
-              name: 'Parx Interiors',
-              image: 'https://www.parxinteriors.in/logo.png',
-              url: 'https://www.parxinteriors.in',
-              telephone: '[FILL: phone number]',
-              address: {
-                '@type': 'PostalAddress',
-                streetAddress: '[FILL: street address]',
-                addressLocality: 'Hyderabad',
-                addressRegion: 'Telangana',
-                postalCode: '[FILL: pincode]',
-                addressCountry: 'IN',
-              },
-              geo: {
-                '@type': 'GeoCoordinates',
-                latitude: '[FILL]',
-                longitude: '[FILL]',
-              },
-              openingHoursSpecification: {
-                '@type': 'OpeningHoursSpecification',
-                dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-                opens: '09:00',
-                closes: '19:00',
-              },
-              priceRange: '₹₹₹',
-              servesCuisine: '',
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue: '5',
-                reviewCount: '1',
-              },
-            }),
-          }}
-        />
+        {/* Global structured data — present on every page */}
+        <JsonLd schema={[
+          organizationSchema(),
+          localBusinessSchema(),
+          websiteSchema(),
+        ]} />
       </head>
       <body>{children}</body>
     </html>

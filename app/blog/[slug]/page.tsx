@@ -4,6 +4,8 @@ import WhatsAppButton from '@/components/WhatsAppButton'
 import Link from 'next/link'
 import { sanityFetch, sanityImageUrl } from '@/lib/sanityFetch'
 import { PortableText } from '@portabletext/react'
+import JsonLd from '@/components/JsonLd'
+import { blogPostingSchema, articleSchema, breadcrumbSchema } from '@/lib/seo'
 
 async function getPost(slug: string) {
   const posts = await sanityFetch<any[]>(`*[_type == "blogPost" && slug.current == "${slug}"]{ title, slug, category, excerpt, featuredImage, body, seoTitle, seoDescription, publishedAt }`)
@@ -55,8 +57,33 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     )
   }
 
+  const postImage = post.featuredImage ? sanityImageUrl(post.featuredImage, 1200) : undefined
+  const datePublished = post.publishedAt || new Date().toISOString()
+
   return (
     <>
+      <JsonLd schema={[
+        blogPostingSchema({
+          title: post.title,
+          description: post.excerpt || post.seoDescription || '',
+          slug: params.slug,
+          image: postImage,
+          datePublished,
+          keywords: post.category ? [post.category] : undefined,
+        }),
+        articleSchema({
+          title: post.title,
+          description: post.excerpt || post.seoDescription || '',
+          slug: params.slug,
+          image: postImage,
+          datePublished,
+          section: post.category,
+        }),
+        breadcrumbSchema([
+          { name: 'Blog', href: '/blog' },
+          { name: post.title, href: `/blog/${params.slug}` },
+        ]),
+      ]} />
       <Nav />
       <main>
         <article className="bg-white pt-36 pb-20">

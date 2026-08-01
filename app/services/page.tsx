@@ -3,6 +3,8 @@ import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import PageHero from '@/components/PageHero'
 import ServicesSplitLayout from '@/components/ServicesSplitLayout'
+import JsonLd from '@/components/JsonLd'
+import { allServicesSchema, breadcrumbSchema } from '@/lib/seo'
 import type { Metadata } from 'next'
 
 const PROJECT_ID = 'dx9xg01d'
@@ -49,6 +51,10 @@ export default async function ServicesPage() {
 
   return (
     <>
+      <JsonLd schema={[
+        ...allServicesSchema(),
+        breadcrumbSchema([{ name: 'Services', href: '/services' }]),
+      ]} />
       <Nav />
       <main>
         <PageHero
