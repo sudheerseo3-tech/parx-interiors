@@ -30,8 +30,8 @@ async function getFounder() {
 }
 
 export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'Parx Interiors — Founded in 2011 by Mani Teja Achuri. 14+ years of delivering premium interiors across Hyderabad with in-house manufacturing.',
+  title: 'About Parx Interiors | Interior Design Company in Hyderabad',
+  description: 'Learn about Parx Interiors, a trusted interior design company in Hyderabad specializing in premium home interiors, modular kitchens and turnkey interior solutions.',
 }
 
 export default async function AboutPage() {

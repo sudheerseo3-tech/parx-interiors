@@ -29,8 +29,8 @@ async function getServices() {
 }
 
 export const metadata: Metadata = {
-  title: 'Services',
-  description: 'Modular kitchens, custom wardrobes, full home interiors, office interiors, false ceilings — all designed and manufactured in-house by Parx Interiors Hyderabad.',
+  title: 'Interior Design Services in Hyderabad | Parx Interiors',
+  description: 'Explore interior design services in Hyderabad including modular kitchens, wardrobes, living rooms, bedrooms and complete turnkey home interiors.',
 }
 
 const fallbackServices = [

@@ -9,8 +9,8 @@ import JsonLd from '@/components/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Projects',
-  description: '250+ homes transformed across Hyderabad. Explore modular kitchens, wardrobes, and full home interiors by Parx Interiors.',
+  title: 'Interior Design Projects in Hyderabad | Parx Interiors',
+  description: 'Explore completed interior design projects by Parx Interiors featuring premium apartments, villas and customized home interiors across Hyderabad.',
 }
 
 async function getProjects() {

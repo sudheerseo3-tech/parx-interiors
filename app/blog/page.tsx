@@ -9,8 +9,8 @@ import JsonLd from '@/components/JsonLd'
 import { breadcrumbSchema } from '@/lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'Expert advice on modular kitchens, wardrobes, home interiors. Design tips, trends, and project stories for Hyderabad homeowners.',
+  title: 'Interior Design Ideas & Tips | Parx Interiors Blog',
+  description: 'Discover interior design ideas, home décor inspiration, modular kitchen tips, renovation guides and expert advice from Parx Interiors.',
 }
 
 const categories = ['All', 'Kitchens', 'Wardrobes', 'Living Room', 'Bedroom', 'Office', 'Tips', 'Materials', 'Trends']
