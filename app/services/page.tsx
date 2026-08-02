@@ -31,6 +31,13 @@ async function getServices() {
 export const metadata: Metadata = {
   title: 'Interior Design Services in Hyderabad | Parx Interiors',
   description: 'Explore interior design services in Hyderabad including modular kitchens, wardrobes, living rooms, bedrooms and complete turnkey home interiors.',
+  alternates: { canonical: 'https://www.parxinteriors.com/services' },
+  openGraph: {
+    title: 'Interior Design Services in Hyderabad | Parx Interiors',
+    description: 'Explore interior design services in Hyderabad including modular kitchens, wardrobes, living rooms, bedrooms and complete turnkey home interiors.',
+    url: 'https://www.parxinteriors.com/services',
+    images: [{ url: 'https://www.parxinteriors.com/og-image.jpg', width: 1200, height: 630 }],
+  },
 }
 
 const fallbackServices = [

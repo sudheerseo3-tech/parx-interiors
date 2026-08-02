@@ -32,6 +32,13 @@ async function getFounder() {
 export const metadata: Metadata = {
   title: 'About Parx Interiors | Interior Design Company in Hyderabad',
   description: 'Learn about Parx Interiors, a trusted interior design company in Hyderabad specializing in premium home interiors, modular kitchens and turnkey interior solutions.',
+  alternates: { canonical: 'https://www.parxinteriors.com/about' },
+  openGraph: {
+    title: 'About Parx Interiors | Interior Design Company in Hyderabad',
+    description: 'Learn about Parx Interiors, a trusted interior design company in Hyderabad specializing in premium home interiors, modular kitchens and turnkey interior solutions.',
+    url: 'https://www.parxinteriors.com/about',
+    images: [{ url: 'https://www.parxinteriors.com/og-image.jpg', width: 1200, height: 630 }],
+  },
 }
 
 export default async function AboutPage() {

@@ -11,6 +11,13 @@ import { breadcrumbSchema } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'Interior Design Projects in Hyderabad | Parx Interiors',
   description: 'Explore completed interior design projects by Parx Interiors featuring premium apartments, villas and customized home interiors across Hyderabad.',
+  alternates: { canonical: 'https://www.parxinteriors.com/projects' },
+  openGraph: {
+    title: 'Interior Design Projects in Hyderabad | Parx Interiors',
+    description: 'Explore completed interior design projects by Parx Interiors featuring premium apartments, villas and customized home interiors across Hyderabad.',
+    url: 'https://www.parxinteriors.com/projects',
+    images: [{ url: 'https://www.parxinteriors.com/og-image.jpg', width: 1200, height: 630 }],
+  },
 }
 
 async function getProjects() {

@@ -2,9 +2,9 @@ export const seoConfig = {
   companyName:   'Parx Interiors',
   legalName:     'Parx Interiors',
   description:   'Premium end-to-end interior design studio in Hyderabad with in-house manufacturing. Residential & commercial interiors, modular kitchens, wardrobes. Free consultation.',
-  website:       'https://www.parxinteriors.in',
-  logo:          'https://www.parxinteriors.in/logo.png',
-  ogImage:       'https://www.parxinteriors.in/og-image.jpg',
+  website:       'https://www.parxinteriors.com',
+  logo:          'https://www.parxinteriors.com/logo.png',
+  ogImage:       'https://www.parxinteriors.com/og-image.jpg',
 
   phone:         '+919177822018',
   phoneDisplay:  '+91 91778 22018',

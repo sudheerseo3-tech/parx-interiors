@@ -1,5 +1,12 @@
+import type { Metadata } from 'next'
 import JsonLd from '@/components/JsonLd'
 import { faqSchema, breadcrumbSchema } from '@/lib/seo'
+
+export const metadata: Metadata = {
+  title: 'Interior Design FAQ | Parx Interiors Hyderabad',
+  description: 'Answers to common questions about interior design costs, timelines, materials, and our process. Parx Interiors — Hyderabad.',
+  alternates: { canonical: 'https://www.parxinteriors.com/faq' },
+}
 
 const faqItems = [
   { question: 'How much does interior design cost in Hyderabad?', answer: 'It depends on the scope, BHK size, and material quality. A 2BHK typically ranges from ₹3-8 lakhs, a 3BHK from ₹5-15 lakhs. Use our Cost Calculator for an instant estimate, or contact us for a detailed quote.' },

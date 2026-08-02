@@ -11,6 +11,13 @@ import { breadcrumbSchema } from '@/lib/seo'
 export const metadata: Metadata = {
   title: 'Interior Design Ideas & Tips | Parx Interiors Blog',
   description: 'Discover interior design ideas, home décor inspiration, modular kitchen tips, renovation guides and expert advice from Parx Interiors.',
+  alternates: { canonical: 'https://www.parxinteriors.com/blog' },
+  openGraph: {
+    title: 'Interior Design Ideas & Tips | Parx Interiors Blog',
+    description: 'Discover interior design ideas, home décor inspiration, modular kitchen tips, renovation guides and expert advice from Parx Interiors.',
+    url: 'https://www.parxinteriors.com/blog',
+    images: [{ url: 'https://www.parxinteriors.com/og-image.jpg', width: 1200, height: 630 }],
+  },
 }
 
 const categories = ['All', 'Kitchens', 'Wardrobes', 'Living Room', 'Bedroom', 'Office', 'Tips', 'Materials', 'Trends']
