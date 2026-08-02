@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import Nav from '@/components/Nav'
+import NavServer from '@/components/NavServer'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import PageHero from '@/components/PageHero'
@@ -30,7 +30,7 @@ export default function CalculatorPage() {
 
   return (
     <>
-      <Nav />
+      <NavServer />
       <main>
         <PageHero
           eyebrow="Cost Calculator"

@@ -152,10 +152,10 @@ function CostCalculatorCTA() {
   )
 }
 
-export default function HomeClient() {
+export default function HomeClient({ logoUrl }: { logoUrl?: string }) {
   return (
     <>
-      <Nav />
+      <Nav logoUrl={logoUrl} />
       <main>
         <HeroSection
           heading={'Where Function\nMeets Finesse.'}

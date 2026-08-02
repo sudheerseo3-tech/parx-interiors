@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import Nav from '@/components/Nav'
+import NavServer from '@/components/NavServer'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import PageHero from '@/components/PageHero'
@@ -57,7 +57,7 @@ export default function FAQPage() {
 
   return (
     <>
-      <Nav />
+      <NavServer />
       <main>
         <PageHero
           eyebrow="Frequently Asked Questions"

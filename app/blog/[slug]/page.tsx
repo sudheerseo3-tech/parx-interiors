@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav'
+import NavServer from '@/components/NavServer'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import Link from 'next/link'
@@ -45,7 +45,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   if (!post) {
     return (
       <>
-        <Nav />
+        <NavServer />
         <main className="bg-white pt-36 pb-20">
           <div className="max-w-3xl mx-auto px-6 text-center">
             <h1 className="font-display text-3xl text-parx-black mb-4">Post not found</h1>
@@ -84,7 +84,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           { name: post.title, href: `/blog/${params.slug}` },
         ]),
       ]} />
-      <Nav />
+      <NavServer />
       <main>
         <article className="bg-white pt-36 pb-20">
           <div className="max-w-3xl mx-auto px-6">

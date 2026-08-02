@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav'
+import NavServer from '@/components/NavServer'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import PageHero from '@/components/PageHero'
@@ -32,7 +32,7 @@ export default async function ReviewsPage() {
 
   return (
     <>
-      <Nav />
+      <NavServer />
       <main>
         <PageHero
           eyebrow="Client Reviews"

@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav'
+import NavServer from '@/components/NavServer'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import PageHero from '@/components/PageHero'
@@ -21,7 +21,7 @@ const steps = [
 export default function ProcessPage() {
   return (
     <>
-      <Nav />
+      <NavServer />
       <main>
         <PageHero
           eyebrow="Our Process"

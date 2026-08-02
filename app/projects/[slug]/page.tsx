@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav'
+import NavServer from '@/components/NavServer'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import Link from 'next/link'
@@ -16,7 +16,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
     const title = params.slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
     return (
       <>
-        <Nav />
+        <NavServer />
         <main className="bg-white pt-36 pb-20">
           <div className="max-w-3xl mx-auto px-6 text-center">
             <h1 className="font-display text-3xl text-parx-black mb-4">{title}</h1>
@@ -31,7 +31,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
 
   return (
     <>
-      <Nav />
+      <NavServer />
       <main>
         <section className="bg-parx-cream pt-36 pb-20">
           <div className="max-w-7xl mx-auto px-6">

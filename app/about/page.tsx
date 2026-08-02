@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav'
+import NavServer from '@/components/NavServer'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import PageHero from '@/components/PageHero'
@@ -48,7 +48,7 @@ export default async function AboutPage() {
   return (
     <>
       <JsonLd schemas={breadcrumbSchema([{ name: 'About', href: '/about' }])} />
-      <Nav />
+      <NavServer />
       <main>
         <PageHero
           eyebrow="About Parx Interiors"

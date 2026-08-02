@@ -3,35 +3,15 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const PROJECT_ID = 'dx9xg01d'
-const DATASET = 'production'
-
-function imgUrl(image: any) {
-  if (!image?.asset?._ref) return ''
-  const ref = image.asset._ref
-  const [, id, dimensions, format] = ref.split('-')
-  return `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}/${id}-${dimensions}.${format}?w=400&auto=format`
-}
-
-export default function Nav() {
+export default function Nav({ logoUrl }: { logoUrl?: string }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [logo, setLogo] = useState<string | null>(null)
   const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
-    fetch(`https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}?query=${encodeURIComponent('*[_type == "siteSettings"][0]{ logo }')}`)
-      .then(r => r.json())
-      .then(d => {
-        if (d.result?.logo) setLogo(imgUrl(d.result.logo))
-      })
-      .catch(() => {})
   }, [])
 
   const links = [
@@ -46,9 +26,9 @@ export default function Nav() {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-2 md:py-3' : 'bg-white py-3 md:py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
         <Link href="/" className="flex-shrink-0">
-          {logo ? (
+          {logoUrl ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={logo} alt="Parx Interiors" className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10 md:h-11' : 'h-11 md:h-12'}`} />
+            <img src={logoUrl} alt="Parx Interiors" className={`w-auto object-contain transition-all duration-300 ${scrolled ? 'h-10 md:h-11' : 'h-11 md:h-12'}`} />
           ) : (
             <div className="flex flex-col leading-none">
               <span className={`font-sans font-black tracking-tight text-parx-black transition-all ${scrolled ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'}`}>

@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav'
+import NavServer from '@/components/NavServer'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import PageHero from '@/components/PageHero'
@@ -30,7 +30,7 @@ export default async function ProjectsPage() {
   return (
     <>
       <JsonLd schemas={breadcrumbSchema([{ name: 'Projects', href: '/projects' }])} />
-      <Nav />
+      <NavServer />
       <main>
         <PageHero
           eyebrow="Our Projects"

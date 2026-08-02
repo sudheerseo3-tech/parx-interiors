@@ -1,4 +1,4 @@
-import Nav from '@/components/Nav'
+import NavServer from '@/components/NavServer'
 import Footer from '@/components/Footer'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import PageHero from '@/components/PageHero'
@@ -62,7 +62,7 @@ export default async function ServicesPage() {
         ...allServicesSchema(),
         breadcrumbSchema([{ name: 'Services', href: '/services' }]),
       ]} />
-      <Nav />
+      <NavServer />
       <main>
         <PageHero
           eyebrow="Our Services"
