@@ -77,10 +77,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description: lp.metaDescription || '',
       images: lp.ogImage ? [sanityImgUrl(lp.ogImage, 1200)] : [],
     },
-    icons: lp.favicon ? {
-      icon: [{ url: sanityImgUrl(lp.favicon, 512), sizes: '512x512', type: 'image/png' }],
-      apple: [{ url: sanityImgUrl(lp.favicon, 180), sizes: '180x180', type: 'image/png' }],
-    } : undefined,
+    icons: {
+      icon: [{ url: lp.favicon ? sanityImgUrl(lp.favicon, 32) : '/icon', sizes: '32x32', type: 'image/png' }],
+      apple: [{ url: lp.favicon ? sanityImgUrl(lp.favicon, 180) : '/apple-icon', sizes: '180x180', type: 'image/png' }],
+    },
   }
 }
 
